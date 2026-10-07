@@ -13,38 +13,76 @@
     <meta property="og:image" content="https://i.ytimg.com/vi/iWEqvKaUiIA/maxresdefault.jpg" />
     <meta property="og:image:alt" content="Zentic Motion showreel artwork" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      document.documentElement.classList.add("js");
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", "#3157ff");
+      try { if (!location.hash && "scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
+    </script>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./pages.css" />
     <script src="./content.js" defer></script>
     <script src="./script.js" defer></script>
-    <noscript><style>.loader{display:none!important}.js-reveal{opacity:1!important;transform:none!important}</style></noscript>
+    <script src="./transitions.js" defer></script>
+    <noscript><style>.loader{display:none!important}body.loading{overflow:auto!important}.js-reveal{opacity:1!important;transform:none!important}</style></noscript>
   </head>
   <body class="loading">
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="loader" aria-hidden="true">
-      <div class="loader-mark">Z<span>/</span>M</div>
-      <div class="loader-track"><i></i></div>
-      <div class="loader-meta"><span>LOADING FRAMES</span><strong>00</strong></div>
+      <div class="loader-stage">
+        <svg class="zm-mark" viewBox="0 0 250.8 128" width="251" height="128" focusable="false">
+          <defs><clipPath id="zm-c-sl"><rect x="93.4" y="1.4" width="39.5" height="125.2"/></clipPath><clipPath id="zm-c-z1"><rect x="-0.6" y="13.4" width="81.2" height="16.2"/></clipPath><clipPath id="zm-c-z2"><rect x="-0.6" y="32.4" width="81.2" height="63.2"/></clipPath><clipPath id="zm-c-z3"><rect x="-0.6" y="98.4" width="81.2" height="16.2"/></clipPath><clipPath id="zm-c-m1"><rect x="145.7" y="13.4" width="16.2" height="101.2"/></clipPath><clipPath id="zm-c-m2"><rect x="164.7" y="13.4" width="67.2" height="81.2"/></clipPath><clipPath id="zm-c-m3"><rect x="234.7" y="13.4" width="16.2" height="101.2"/></clipPath></defs>
+          <g clip-path="url(#zm-c-sl)"><polygon class="zm-slab zm-sl" points="128.7,2 132.3,2 97.6,126 94,126"/></g>
+          <g clip-path="url(#zm-c-z1)"><polygon class="zm-slab zm-z1" points="0,14 80,14 80,29 0,29"/></g>
+          <g clip-path="url(#zm-c-z2)"><polygon class="zm-slab zm-z2" points="59,33 80,33 21,95 0,95"/></g>
+          <g clip-path="url(#zm-c-z3)"><polygon class="zm-slab zm-z3" points="0,99 80,99 80,114 0,114"/></g>
+          <g clip-path="url(#zm-c-m1)"><polygon class="zm-slab zm-m1" points="146.3,14 161.3,14 161.3,114 146.3,114"/></g>
+          <g clip-path="url(#zm-c-m2)"><polygon class="zm-slab zm-m2" points="165.3,14 182.3,14 198.3,52.8 214.3,14 231.3,14 198.3,94"/></g>
+          <g clip-path="url(#zm-c-m3)"><polygon class="zm-slab zm-m3" points="235.3,14 250.3,14 250.3,114 235.3,114"/></g>
+        </svg>
+      </div>
     </div>
     <div class="cursor" aria-hidden="true"><span>VIEW</span></div>
     <div class="grain" aria-hidden="true"></div>
+    <div class="page-veil" aria-hidden="true"></div>
 
     <header class="site-header">
       <a class="brand magnetic" href="#top" aria-label="Zentic Motion home"><img class="brand-logo" src="./assets/zentic-logo-metallic.webp" alt="Zentic Motion" width="512" height="512" /></a>
       <div class="header-role">WEB DESIGNER <span>+</span> CREATIVE DEVELOPER</div>
-      <nav class="desktop-nav" aria-label="Main navigation"><a href="#web">Web</a><a href="#work">Work</a><a href="#about">About</a><a href="#services">Services</a></nav>
-      <a class="header-cta magnetic" href="#contact">Start a project <span>↗</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation"><a href="/web/">Web</a><a href="/motion/">Work</a><a href="/#about">About</a><a href="/#services">Services</a></nav>
+      <a class="header-cta magnetic" href="/#contact">Start a project <span>↗</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span class="menu-word">Menu</span><span class="menu-icon" aria-hidden="true">+</span></button>
     </header>
 
     <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
       <div class="mobile-menu-top"><span>Navigate</span><span>ZM — 2026</span></div>
-      <a href="#web"><small>01</small><span>Web</span></a><a href="#work"><small>02</small><span>Work</span></a><a href="#about"><small>03</small><span>About</span></a><a href="#services"><small>04</small><span>Services</span></a><a href="#contact"><small>05</small><span>Contact</span></a>
+      <a href="/web/"><small>01</small><span>Web</span></a><a href="/motion/"><small>02</small><span>Work</span></a><a href="/#about"><small>03</small><span>About</span></a><a href="/#services"><small>04</small><span>Services</span></a><a href="/#contact"><small>05</small><span>Contact</span></a>
       <div class="mobile-menu-foot"><p>Delhi, India<br />Available for remote projects</p><a href="mailto:zenticmotion@gmail.com">zenticmotion@gmail.com</a></div>
     </nav>
 
     <main id="main">
       <section class="hero" id="top" aria-labelledby="hero-title">
+        <video id="hero-bg-video" class="hero-bg-video" src="./assets/hero-bg.mp4" poster="./assets/hero-bg-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+        <script>
+          /* Hero background video: nudge playback to start ASAP so it is already
+             playing underneath the intro layer when the intro lifts away.
+             Respects prefers-reduced-motion (poster frame only). */
+          (function () {
+            var v = document.getElementById("hero-bg-video");
+            if (!v) return;
+            try {
+              if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                v.removeAttribute("autoplay");
+                v.pause();
+                return;
+              }
+            } catch (e) {}
+            var play = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+            if (v.readyState >= 2) play();
+            else v.addEventListener("canplay", play, { once: true });
+          })();
+        </script>
         <div class="hero-grid" aria-hidden="true"></div>
         <div class="hero-meta top-meta"><p><span class="status-dot"></span> FREELANCE / AVAILABLE</p><p>DELHI, INDIA <span class="slash">/</span> WORLDWIDE</p></div>
         <div class="hero-copy">
@@ -71,54 +109,185 @@
         <div class="manifesto-foot js-reveal"><p>From the first scroll to the final click.</p><p>WEB / MOTION / VIDEO / 3D</p></div>
       </section>
 
-      <section class="web-work light-section" id="web" aria-labelledby="web-title">
-        <div class="section-head web-head js-reveal"><div><p class="eyebrow"><span>01</span> SELECTED WEB WORK</p><h2 id="web-title">Built to be<br /><em>experienced.</em></h2></div><p class="section-copy">Portfolio and business websites with cinematic art direction — designed to turn visitors into clients.</p></div>
-        <div class="web-projects">
-          <article class="web-project web-lumea js-reveal">
-            <a class="web-stage cursor-open" href="https://lumea-beauty-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Luméa Beauty portfolio website"><img src="./assets/lumea-site.webp" alt="Luméa Beauty interactive lipstick storefront homepage" width="1200" height="750" loading="lazy" decoding="async" /><span class="browser-bar"><i></i><i></i><i></i><b>LUMÉA / BEAUTY</b></span><span class="web-open">OPEN LIVE SITE ↗</span></a>
-            <div class="web-info"><div><small>WEB / 01</small><h3>Luméa Beauty</h3></div><p>Interactive beauty storefront<br />Scroll choreography · product reveal · responsive UI</p></div>
-          </article>
-          <article class="web-project web-noir js-reveal">
-            <a class="web-stage cursor-open" href="https://noir-watch-website.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Noir watch website"><img src="./assets/noir-site.webp" alt="Noir luxury watch website homepage" width="1200" height="750" loading="lazy" decoding="async" /><span class="browser-bar"><i></i><i></i><i></i><b>NOIR / AUTOMATIC 01</b></span><span class="web-open">OPEN LIVE SITE ↗</span></a>
-            <div class="web-info"><div><small>WEB / 02</small><h3>Noir Watch</h3></div><p>Cinematic luxury watch concept<br />Editorial storytelling · interaction · responsive front-end</p></div>
-          </article>
+      <section class="selected selected-web" id="web" aria-labelledby="web-title">
+        <div class="sel-head js-reveal">
+          <p class="eyebrow"><span>01</span> SELECTED WEB WORK</p>
+          <div class="sel-head-row">
+            <h2 id="web-title">Selected<br /><em>web work.</em></h2>
+            <p class="sel-count"><span>04</span> CURATED</p>
+          </div>
+        </div>
+        <div class="sel-grid" id="grid-web" role="list" aria-label="Selected web projects"></div>
+        <div class="sel-foot js-reveal">
+          <a class="sel-more" href="/web/"><span>VIEW ALL WEB PROJECTS</span><i aria-hidden="true">↗</i></a>
         </div>
       </section>
 
-      <section class="work section-pad" id="work" aria-labelledby="work-title">
-        <div class="section-head js-reveal"><div><p class="eyebrow"><span>02</span> SELECTED VIDEO WORK</p><h2 id="work-title">Made to be<br /><em>watched.</em></h2></div><p class="section-copy">Product films, kinetic type and cinematic edits — composed with a clear idea and a deliberate rhythm.</p></div>
-        <div class="project-sequence">
-          <article class="project project-wide js-reveal" id="macbook">
-            <a class="project-media media-link cursor-view" href="https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&amp;public_id=macbook_ae_lktf4i" data-project="macbook" aria-label="Watch MacBook Pro cinematic reveal"><img src="./assets/macbook.webp" alt="MacBook Pro product animation frame" width="1600" height="900" loading="lazy" decoding="async" /><span class="project-number">01</span><span class="project-duration">00:12</span><span class="project-view">PLAY FILM <b>↗</b></span></a>
-            <div class="project-info"><div><h3>MacBook Pro</h3><p>Cinematic product reveal</p></div><div class="project-meta"><span>3D ANIMATION</span><span>BLENDER</span><span>2026</span></div></div>
-          </article>
-          <div class="project-duo">
-            <article class="project project-portrait js-reveal" id="airpods">
-              <a class="project-media media-link cursor-view" href="https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&amp;public_id=3d_object_animation_nrtxd1" data-project="airpods" aria-label="Watch AirPods Pro 3D spot"><img src="./assets/airpods.webp" alt="AirPods Pro in a 3D product scene" width="1200" height="900" loading="lazy" decoding="async" /><span class="project-number">02</span><span class="project-duration">00:15</span><span class="project-view">PLAY FILM <b>↗</b></span></a>
-              <div class="project-info"><div><h3>AirPods Pro</h3><p>Full 3D product spot</p></div><div class="project-meta"><span>BLENDER CYCLES</span><span>3D</span></div></div>
-            </article>
-            <article class="project project-square js-reveal" id="typography">
-              <a class="project-media media-link cursor-view" href="https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&amp;public_id=typography_oqp0ek" data-project="typography" aria-label="Watch kinetic typography experiment"><img src="./assets/typography.webp" alt="Kinetic typography animation frame" width="1200" height="900" loading="lazy" decoding="async" /><span class="project-number">03</span><span class="project-duration">00:09</span><span class="project-view">PLAY FILM <b>↗</b></span></a>
-              <div class="project-info"><div><h3>Kinetic Type</h3><p>Type in motion</p></div><div class="project-meta"><span>AFTER EFFECTS</span><span>MOTION</span></div></div>
-            </article>
+      <section class="selected selected-motion" id="work" aria-labelledby="motion-title">
+        <div class="sel-head js-reveal">
+          <p class="eyebrow"><span>02</span> SELECTED MOTION</p>
+          <div class="sel-head-row">
+            <h2 id="motion-title">Selected<br /><em>motion.</em></h2>
+            <p class="sel-count"><span>04</span> CURATED</p>
           </div>
-          <article class="project project-cinema js-reveal" id="watch">
-            <a class="project-media media-link cursor-view" href="https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&amp;public_id=watch_ad_egexxk" data-project="watch" aria-label="Watch Galaxy Watch advertisement concept"><img src="./assets/watch.webp" alt="Galaxy Watch advertisement concept frame" width="1600" height="900" loading="lazy" decoding="async" /><span class="project-number">04</span><span class="project-duration">00:11</span><span class="project-view">PLAY FILM <b>↗</b></span></a>
-            <div class="project-info"><div><h3>Galaxy Watch</h3><p>Advertisement concept</p></div><div class="project-meta"><span>PRODUCT FILM</span><span>COMPOSITING</span><span>2026</span></div></div>
-          </article>
-          <article class="project project-offset js-reveal" id="brand-film">
-            <a class="project-media media-link cursor-view" href="https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&amp;public_id=zenticmotion_c7thrn" data-project="brand" aria-label="Watch cinematic brand motion edit"><img src="./assets/brand.webp" alt="Cinematic brand motion edit frame" width="1600" height="900" loading="lazy" decoding="async" /><span class="project-number">05</span><span class="project-duration">00:18</span><span class="project-view">PLAY FILM <b>↗</b></span></a>
-            <div class="project-info"><div><h3>Brand Motion</h3><p>Cinematic story edit</p></div><div class="project-meta"><span>EDITING</span><span>COLOUR</span><span>PREMIERE PRO</span></div></div>
-          </article>
+        </div>
+        <div class="sel-grid" id="grid-motion" role="list" aria-label="Selected motion work"></div>
+        <div class="sel-foot js-reveal">
+          <a class="sel-more" href="/motion/"><span>VIEW ALL MOTION WORK</span><i aria-hidden="true">↗</i></a>
         </div>
       </section>
+      <script>
+        /* ============================================================
+           HOMEPAGE SELECTIONS — EDIT PROJECTS HERE
+           To add, remove or replace a project, edit the objects below
+           (n, title, category, year, thumb, href). No markup changes needed.
+           - Web entries link out to the live site (new tab).
+           - Motion entries open the film player via data-project
+             (player details live in content.js).
+           - { placeholder: true } renders a subtle empty future slot.
+           ============================================================ */
+        (function () {
+          var WEB = [
+            { n: "01", title: "Luméa Beauty", category: "WEB DESIGN / DEVELOPMENT", year: "2026",
+              thumb: "./assets/lumea-site.webp", alt: "Luméa Beauty interactive lipstick storefront homepage",
+              href: "https://lumea-beauty-portfolio.vercel.app/", aria: "Open the live Luméa Beauty website" },
+            { n: "02", title: "BMW M4 Competition", category: "WEB DESIGN / DEVELOPMENT", year: "2026",
+              thumb: "./assets/web-bmw-m4.webp", alt: "BMW M4 Competition concept website homepage",
+              href: "https://bmw-m4-concept.vercel.app/", aria: "Open the BMW M4 Competition concept website" },
+            { n: "03", title: "Captured by Andrew", category: "WEB DESIGN / DEVELOPMENT", year: "2026",
+              thumb: "./assets/web-andrew.webp", alt: "Captured by Andrew automotive photographer portfolio homepage",
+              href: "https://andrew-auto-portfolio.vercel.app/", aria: "Open the Captured by Andrew portfolio website" },
+            { n: "04", title: "Constance N.", category: "WEB DESIGN / DEVELOPMENT", year: "2026",
+              thumb: "./assets/web-constance.webp", alt: "Constance N. wedding photographer portfolio homepage",
+              href: "https://constance-preview.vercel.app/", aria: "Open the Constance N. portfolio preview website" }
+          ];
+          var MOTION = [
+            { n: "01", title: "MacBook Pro", category: "3D ANIMATION", year: "2026",
+              thumb: "./assets/macbook.webp", alt: "MacBook Pro product animation frame",
+              href: "https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&public_id=macbook_ae_lktf4i",
+              project: "macbook", aria: "Watch MacBook Pro cinematic reveal" },
+            { n: "02", title: "AirPods Pro", category: "3D ANIMATION", year: "2026",
+              thumb: "./assets/airpods.webp", alt: "AirPods Pro in a 3D product scene",
+              href: "https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&public_id=3d_object_animation_nrtxd1",
+              project: "airpods", aria: "Watch AirPods Pro 3D spot" },
+            { n: "03", title: "Kinetic Type", category: "MOTION GRAPHICS", year: "2026",
+              thumb: "./assets/typography.webp", alt: "Kinetic typography animation frame",
+              href: "https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&public_id=typography_oqp0ek",
+              project: "typography", aria: "Watch kinetic typography experiment" },
+            { n: "04", title: "Galaxy Watch", category: "COMMERCIAL", year: "2026",
+              thumb: "./assets/watch.webp", alt: "Galaxy Watch advertisement concept frame",
+              href: "https://player.cloudinary.com/embed/?cloud_name=dtmah5v1c&public_id=watch_ad_egexxk",
+              project: "watch", aria: "Watch Galaxy Watch advertisement concept" }
+          ];
+          function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+          function num(n) { return '<span class="sel-num" aria-hidden="true">' + n + "</span>"; }
+          function meta(p) { return '<p class="sel-meta"><span>' + esc(p.category) + "</span><span>" + esc(p.year) + "</span></p>"; }
+          function webCard(p, i) {
+            var d = (i * 0.07).toFixed(2) + "s";
+            if (p.placeholder) {
+              return '<article class="sel-card sel-empty js-reveal" style="--d:' + d + '" role="listitem" aria-label="Open project slot ' + p.n + '">' +
+                '<div class="sel-media sel-media-empty">' + num(p.n) + '<span class="sel-plus" aria-hidden="true">+</span></div>' +
+                '<div class="sel-info"><h3>Open slot</h3><p class="sel-meta"><span>FUTURE PROJECT</span><span>&mdash;</span></p></div></article>';
+            }
+            return '<article class="sel-card js-reveal" style="--d:' + d + '" role="listitem">' +
+              '<a class="sel-media cursor-open" href="' + esc(p.href) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(p.aria) + '">' +
+              '<img src="' + esc(p.thumb) + '" alt="' + esc(p.alt) + '" width="1200" height="750" loading="lazy" decoding="async" />' +
+              num(p.n) + '<span class="sel-view" aria-hidden="true">VIEW <i>↗</i></span></a>' +
+              '<div class="sel-info"><h3>' + esc(p.title) + "</h3>" + meta(p) + "</div></article>";
+          }
+          function motionCard(p, i) {
+            var d = (i * 0.07).toFixed(2) + "s";
+            return '<article class="sel-card js-reveal" style="--d:' + d + '" role="listitem">' +
+              '<a class="sel-media sel-media-video media-link cursor-view" href="' + esc(p.href) + '" data-project="' + esc(p.project) + '" aria-label="' + esc(p.aria) + '">' +
+              '<img src="' + esc(p.thumb) + '" alt="' + esc(p.alt) + '" width="1600" height="900" loading="lazy" decoding="async" />' +
+              num(p.n) + '<span class="sel-play" aria-hidden="true">▶</span></a>' +
+              '<div class="sel-info"><h3>' + esc(p.title) + "</h3>" + meta(p) + "</div></article>";
+          }
+          var gw = document.getElementById("grid-web");
+          var gm = document.getElementById("grid-motion");
+          if (gw) gw.innerHTML = WEB.map(webCard).join("");
+          if (gm) gm.innerHTML = MOTION.map(motionCard).join("");
+        })();
+      </script>
 
       <section class="about section-pad" id="about" aria-labelledby="about-title">
         <div class="about-layout">
           <div class="about-title-block js-reveal"><p class="eyebrow"><span>03</span> ABOUT</p><h2 id="about-title">One eye on<br />the cut. One on<br /><em>the feeling.</em></h2></div>
           <div class="about-copy js-reveal"><p class="about-lead">I’m Krishna Chauhan, the web designer and creative developer behind Zentic Motion.</p><p>I build premium portfolio and business websites — with cinematic art direction, smooth motion and a clear focus on turning visitors into clients. Video editing and motion graphics are part of the toolkit, not the whole story.</p><p>Based in Delhi, India. Working remotely with photographers, brands and small businesses.</p><a class="underlined-link magnetic" href="#contact">Tell me about the project <span>↗</span></a></div>
         </div>
-        <div class="toolkit js-reveal" aria-label="Creative toolkit"><div class="toolkit-head"><span>WORKING TOOLKIT</span><span>08 APPLICATIONS</span></div><div class="tool-list"><span><b>&lt;/&gt;</b>HTML / CSS / JS</span><span><b>Vc</b>VS Code</span><span><b>Ae</b>After Effects</span><span><b>Pr</b>Premiere Pro</span><span><b>Bl</b>Blender</span><span><b>Ps</b>Photoshop</span><span><b>Sb</b>Supabase</span><span><b>V</b>Vercel</span></div></div>
+        <div class="toolkit tk" aria-label="Capabilities and toolkit">
+          <div class="tk-head js-reveal">
+            <div>
+              <p class="eyebrow"><span>&mdash;</span> CAPABILITIES / TOOLKIT</p>
+              <h2 class="tk-title">Tools behind the work.</h2>
+            </div>
+            <p class="tk-note">Web-first &mdash; with a strong motion &amp; visual core.</p>
+          </div>
+          <div class="tk-group">
+            <div class="tk-group-label js-reveal"><span>WEB / DEVELOPMENT</span><span>05</span></div>
+            <div class="tk-grid tk-grid-web">
+              <figure class="tk-cell tk-cell-wide js-reveal" style="--d:.05s">
+                <span class="tk-index" aria-hidden="true">01</span>
+                <img class="tk-logo" src="./assets/tool-html-css-js.png" alt="HTML, CSS and JavaScript logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>HTML / CSS / JS</strong><small>Core stack</small></figcaption>
+              </figure>
+              <figure class="tk-cell tk-cell-wide js-reveal" style="--d:.12s">
+                <span class="tk-index" aria-hidden="true">02</span>
+                <img class="tk-logo" src="./assets/tool-react.png" alt="React logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>React</strong><small>Front-end UI</small></figcaption>
+              </figure>
+              <figure class="tk-cell js-reveal" style="--d:.19s">
+                <span class="tk-index" aria-hidden="true">03</span>
+                <img class="tk-logo" src="./assets/tool-threejs.png" alt="Three.js logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>Three.js</strong><small>3D / WebGL</small></figcaption>
+              </figure>
+              <figure class="tk-cell js-reveal" style="--d:.26s">
+                <span class="tk-index" aria-hidden="true">04</span>
+                <img class="tk-logo" src="./assets/tool-supabase.png" alt="Supabase logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>Supabase</strong><small>Backend / data</small></figcaption>
+              </figure>
+              <figure class="tk-cell js-reveal" style="--d:.33s">
+                <span class="tk-index" aria-hidden="true">05</span>
+                <img class="tk-logo" src="./assets/tool-vercel.png" alt="Vercel logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>Vercel</strong><small>Hosting / deploy</small></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="tk-group">
+            <div class="tk-group-label js-reveal"><span>MOTION / VISUAL</span><span>03</span></div>
+            <div class="tk-grid tk-grid-motion">
+              <figure class="tk-cell js-reveal" style="--d:.05s">
+                <span class="tk-index" aria-hidden="true">06</span>
+                <img class="tk-logo" src="./assets/tool-aftereffects.png" alt="Adobe After Effects logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>After Effects</strong><small>Motion graphics</small></figcaption>
+              </figure>
+              <figure class="tk-cell js-reveal" style="--d:.12s">
+                <span class="tk-index" aria-hidden="true">07</span>
+                <img class="tk-logo" src="./assets/tool-premiere.png" alt="Adobe Premiere Pro logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>Premiere Pro</strong><small>Video editing</small></figcaption>
+              </figure>
+              <figure class="tk-cell js-reveal" style="--d:.19s">
+                <span class="tk-index" aria-hidden="true">08</span>
+                <img class="tk-logo" src="./assets/tool-blender.png" alt="Blender logo" width="640" height="640" loading="lazy" decoding="async" />
+                <figcaption class="tk-meta"><strong>Blender</strong><small>3D / CGI</small></figcaption>
+              </figure>
+            </div>
+          </div>
+          <script>
+            /* Toolkit cells: soft cursor-reactive highlight (very subtle, monochrome). */
+            (function () {
+              document.querySelectorAll(".tk-grid").forEach(function (grid) {
+                grid.addEventListener("pointermove", function (e) {
+                  var cell = e.target && e.target.closest ? e.target.closest(".tk-cell") : null;
+                  if (!cell || !grid.contains(cell)) return;
+                  var r = cell.getBoundingClientRect();
+                  cell.style.setProperty("--mx", Math.round(e.clientX - r.left) + "px");
+                  cell.style.setProperty("--my", Math.round(e.clientY - r.top) + "px");
+                });
+              });
+            })();
+          </script>
+        </div>
       </section>
 
       <section class="services light-section" id="services" aria-labelledby="services-title">
@@ -159,5 +328,16 @@
       <p class="player-help">If playback doesn’t start, open the original.</p>
     </dialog>
     <div class="toast" role="status" aria-live="polite"></div>
+    <script>
+      /* Failsafe: if the intro script never runs, never leave the visitor on the blue screen. */
+      setTimeout(function () {
+        var loader = document.querySelector(".loader");
+        if (!loader) return;
+        loader.remove();
+        document.body.classList.remove("loading", "intro-reveal");
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", "#0b0b0b");
+      }, 9000);
+    </script>
   </body>
 </html>

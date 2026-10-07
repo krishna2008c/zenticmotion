@@ -1,4 +1,6 @@
-/* Project player details. Titles and thumbnails on the page live in index.html. */
+/* Project player details. Titles and thumbnails on the page live in index.html.
+   Homepage curation (the Selected Web / Selected Motion grids) is driven by
+   the "HOMEPAGE SELECTIONS" data block in index.html — edit the arrays there. */
 window.ZENTIC = {
   email: "zenticmotion@gmail.com",
   preview: "./assets/preview.mp4",

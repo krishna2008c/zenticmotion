@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0b0b" />
+    <title>Motion Work — Zentic Motion</title>
+    <meta name="description" content="All motion design and video editing work by Krishna Chauhan — Zentic Motion. 3D animation, motion graphics and cinematic edits." />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/pages.css" />
+  </head>
+  <body class="subpage">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-veil" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"><span>VIEW</span></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="site-header" id="top">
+      <a class="brand magnetic" href="/" aria-label="Zentic Motion home"><img class="brand-logo" src="/assets/zentic-logo-metallic.webp" alt="Zentic Motion" width="512" height="512" /></a>
+      <div class="header-role">WEB DESIGNER <span>+</span> CREATIVE DEVELOPER</div>
+      <nav class="desktop-nav" aria-label="Main navigation"><a href="/web/">Web</a><a href="/motion/" aria-current="page">Work</a><a href="/#about">About</a><a href="/#services">Services</a></nav>
+      <a class="header-cta magnetic" href="/#contact">Start a project <span>↗</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span class="menu-word">Menu</span><span class="menu-icon" aria-hidden="true">+</span></button>
+    </header>
+
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+      <div class="mobile-menu-top"><span>Navigate</span><span>ZM — 2026</span></div>
+      <a href="/web/"><small>01</small><span>Web</span></a><a href="/motion/"><small>02</small><span>Work</span></a><a href="/#about"><small>03</small><span>About</span></a><a href="/#services"><small>04</small><span>Services</span></a><a href="/#contact"><small>05</small><span>Contact</span></a>
+      <div class="mobile-menu-foot"><p>Delhi, India<br />Available for remote projects</p><a href="mailto:zenticmotion@gmail.com">zenticmotion@gmail.com</a></div>
+    </nav>
+
+    <main id="main">
+      <section class="page-hero" aria-labelledby="page-title">
+        <p class="eyebrow js-reveal"><span>02</span> MOTION</p>
+        <h1 class="page-title js-reveal" id="page-title">Frames, movement<br /><em>and visual rhythm.</em></h1>
+        <p class="page-tags js-reveal"><span>Motion design</span><i>✦</i><span>Video editing</span><i>✦</i><span>Visual storytelling</span></p>
+      </section>
+
+      <section class="archive archive-motion" aria-label="All motion work">
+        <div class="sel-grid" id="archive-motion" role="list" aria-label="Motion work archive"></div>
+        <p class="archive-note js-reveal"><i>✦</i>More work on the way — this archive grows with every project.</p>
+      </section>
+
+      <footer><span>© <b id="year">2026</b> ZENTIC MOTION</span><span>KRISHNA CHAUHAN / DELHI, INDIA</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </main>
+
+    <dialog id="film-dialog" class="film-dialog" aria-labelledby="film-title">
+      <div class="dialog-bar"><span>NOW PLAYING / <b id="film-category"></b></span><button class="dialog-close" type="button" aria-label="Close film">Close <i aria-hidden="true">×</i></button></div>
+      <div id="player-area" class="player-area"></div>
+      <div class="dialog-copy"><div><h2 id="film-title"></h2><p id="film-description"></p></div><div><span id="film-tools"></span><a id="film-source" href="#" target="_blank" rel="noopener">Open original ↗</a></div></div>
+      <p class="player-help">If playback doesn’t start, open the original.</p>
+    </dialog>
+
+    <script src="/content.js" defer></script>
+    <script src="/pages.js" defer></script>
+    <script src="/transitions.js" defer></script>
+  </body>
+</html>

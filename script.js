@@ -28,37 +28,70 @@
   heroCover?.addEventListener("error", () => {
     heroCover.src = "./assets/showreel.webp";
   }, { once: true });
+  // the remote thumbnail can fail before this deferred script attaches the listener above
+  if (heroCover?.complete && !heroCover.naturalWidth) heroCover.src = "./assets/showreel.webp";
 
-  function finishLoader() {
+  /* ---------- Opening sequence ----------
+     CSS drives the mark's entrance from first paint. Here we only decide WHEN the blue layer
+     leaves: after a minimum hold, and once fonts and the hero image are ready (capped, so a slow
+     network can never trap the visitor). Runs once per page load. */
+  function runIntro() {
     const loader = $(".loader");
-    if (!loader) return;
-    $(".loader-track i").style.width = "100%";
-    $(".loader-meta strong").textContent = "100";
-    loader.classList.add("done");
-    body.classList.remove("loading");
-    setTimeout(() => loader.remove(), 500);
-  }
-
-  function runLoader() {
-    if (reducedMotion.matches) {
-      finishLoader();
+    const themeMeta = $('meta[name="theme-color"]');
+    const setTheme = (color) => themeMeta?.setAttribute("content", color);
+    if (!loader) {
+      body.classList.remove("loading", "intro-reveal");
+      setTheme("#0b0b0b");
       return;
     }
-    const counter = $(".loader-meta strong");
-    const line = $(".loader-track i");
-    let value = 0;
-    const tick = () => {
-      const remaining = 100 - value;
-      value += Math.max(1, Math.ceil(remaining * 0.42));
-      value = Math.min(value, 100);
-      counter.textContent = String(value).padStart(2, "0");
-      line.style.width = `${value}%`;
-      if (value < 100) setTimeout(tick, 16 + Math.random() * 12);
-      else setTimeout(finishLoader, 40);
-    };
-    setTimeout(tick, 40);
+
+    const reduced = reducedMotion.matches;
+    const MIN_HOLD = reduced ? 900 : 1700;  // ms the finished mark has to be on screen from its start
+    const MAX_WAIT = 3400;                  // hard cap on waiting for assets
+    const EXIT_MS = reduced ? 520 : 1120;   // keep in sync with --exit in the CSS
+    const TAIL_MS = reduced ? 0 : 2400;     // long enough for the slowest homepage entrance to finish
+
+    // the mark's CSS animation starts at first paint, before this script runs: account for that
+    const probe = $(".zm-sl", loader)?.getAnimations?.()[0];
+    const elapsed = Math.min(Number(probe?.currentTime) || 0, MIN_HOLD);
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const fontsReady = document.fonts?.ready ?? Promise.resolve();
+    // hero image: wait for whichever source ends up loading (the page swaps to a local copy if the remote one fails)
+    const heroReady = !heroCover ? Promise.resolve() : new Promise((resolve) => {
+      const ready = () => (heroCover.decode ? heroCover.decode().catch(() => {}) : Promise.resolve()).then(resolve);
+      if (heroCover.complete) ready();   // already loaded, or already failed: nothing left to wait for
+      else heroCover.addEventListener("load", ready, { once: true });
+    });
+
+    // the layer is a pure overlay: don't let touch scrolling move the page underneath it
+    loader.addEventListener("touchmove", (event) => event.preventDefault(), { passive: false });
+
+    let finished = false;
+    function finish() {
+      if (finished) return;
+      finished = true;
+      loader.remove();
+      body.classList.remove("loading");
+      setTheme("#0b0b0b");
+      // the homepage entrance may still be settling; drop its class once it is done
+      setTimeout(() => body.classList.remove("intro-reveal"), Math.max(0, TAIL_MS - EXIT_MS));
+    }
+
+    function exit() {
+      body.classList.add("intro-reveal");
+      loader.classList.add("is-exit");
+      if (!reduced) setTimeout(() => setTheme("#0b0b0b"), EXIT_MS * 0.5);
+      loader.addEventListener("transitionend", (event) => { if (event.target === loader) finish(); });
+      setTimeout(finish, EXIT_MS + 250);
+    }
+
+    Promise.race([
+      Promise.all([sleep(MIN_HOLD - elapsed), fontsReady, heroReady]),
+      sleep(MAX_WAIT - elapsed),
+    ]).then(exit, exit);
   }
-  runLoader();
+  runIntro();
 
   function toast(message) {
     const element = $(".toast");

@@ -1,0 +1,78 @@
+/* Zentic Motion — dedicated portfolio pages (/web/, /motion/).
+   Extends the existing visual system; nothing here restyles the homepage. */
+
+/* ---------- Page transition veil ---------- */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #0b0b0b;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Entrance: subpages start covered and fade in (homepage keeps its loader intro). */
+.js body.subpage .page-veil { opacity: 1; }
+.js body.subpage .page-veil.is-out { opacity: 0; transition: opacity 0.55s ease 0.05s; }
+/* Exit: quick cover before navigating away. */
+.js .page-veil.is-in {
+  opacity: 1 !important;
+  transition: opacity 0.38s ease;
+  pointer-events: all;
+}
+
+/* ---------- Subpage header state ---------- */
+.desktop-nav a[aria-current="page"] { color: var(--white); }
+.desktop-nav a[aria-current="page"]::after { transform: scaleX(1); }
+
+/* ---------- Page hero ---------- */
+.page-hero { padding: calc(var(--section) * 0.85 + 84px) var(--pad) 0; }
+.page-hero .eyebrow { margin-bottom: 26px; }
+.page-title {
+  font-size: clamp(40px, 6.2vw, 104px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  max-width: 16ch;
+}
+.page-title em { font-style: italic; font-weight: 400; }
+.page-tags {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+}
+.page-tags i { font-style: normal; color: var(--blue); }
+
+/* ---------- Archive grid ---------- */
+.archive { padding: var(--section) var(--pad) calc(var(--section) * 1.1); }
+/* Slightly more cinematic posters on the motion archive. */
+.archive-motion .sel-media { aspect-ratio: 16 / 9; }
+/* Archive cards carry a short factual description under the title. */
+.archive-info { align-items: flex-start; }
+.archive-titles { min-width: 0; }
+.sel-desc {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: var(--muted-dark);
+  max-width: 46ch;
+}
+.archive-note {
+  margin-top: clamp(28px, 4vw, 52px);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+}
+.archive-note i { font-style: normal; color: var(--blue); margin-right: 12px; }
+
+@media (max-width: 760px) {
+  .page-hero { padding-top: calc(var(--section) + 64px); }
+  .page-title { font-size: clamp(38px, 11vw, 60px); }
+  .sel-desc { font-size: 11px; }
+}
