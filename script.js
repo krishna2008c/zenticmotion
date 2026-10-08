@@ -208,16 +208,45 @@
 
   const contactForm = $("#contact-form");
   contactForm.hidden = false;
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!contactForm.reportValidity()) return;
     const data = new FormData(contactForm);
-    const service = String(data.get("service") || "Zentic Motion project");
-    const subject = `Project enquiry — ${service}`;
-    const brief = `Hi Krishna,\n\n${String(data.get("message")).trim()}\n\nProject type: ${service}\nName: ${String(data.get("name")).trim()}\nEmail: ${String(data.get("email")).trim()}`;
-    $("#draft-text").value = `To: ${config.email}\nSubject: ${subject}\n\n${brief}`;
-    $("#draft-fallback").hidden = false;
-    location.href = `mailto:${config.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
+    const payload = {
+      name: String(data.get("name") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      service: String(data.get("service") || "").trim(),
+      message: String(data.get("message") || "").trim(),
+      company: String(data.get("company") || "").trim(), // honeypot
+    };
+    const sendBtn = contactForm.querySelector(".send-button");
+    const sendLabel = sendBtn.querySelector("span");
+    const originalLabel = sendLabel.textContent;
+    sendBtn.disabled = true;
+    sendLabel.textContent = "SENDING…";
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || "Send failed.");
+      contactForm.reset();
+      toast("Brief sent — I'll reply within 48 hours.");
+    } catch (err) {
+      // Fallback: open the visitor's email app with the prefilled brief.
+      const service = payload.service || "Zentic Motion project";
+      const subject = `Project enquiry — ${service}`;
+      const brief = `Hi Krishna,\n\n${payload.message}\n\nProject type: ${service}\nName: ${payload.name}\nEmail: ${payload.email}`;
+      $("#draft-text").value = `To: ${config.email}\nSubject: ${subject}\n\n${brief}`;
+      $("#draft-fallback").hidden = false;
+      toast("Couldn't send directly — your email app is opening instead.");
+      location.href = `mailto:${config.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
+    } finally {
+      sendBtn.disabled = false;
+      sendLabel.textContent = originalLabel;
+    }
   });
   $$("[data-service]").forEach((link) => link.addEventListener("click", () => {
     $("#service").value = link.dataset.service;

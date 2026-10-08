@@ -639,6 +639,16 @@ footer a { justify-self: end; }
   position: relative;
   z-index: 1;
 }
+/* Honeypot anti-spam field: invisible to humans, bots fill it. */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
 /* The about section had an opaque black background that would hide the tube.
    Body is the same #0b0b0b, so transparent is visually identical — except the
    tube now shows through the empty black space. Cards keep their own opaque

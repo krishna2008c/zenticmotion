@@ -315,7 +315,8 @@
             <label><span>02 / EMAIL</span><input type="email" name="email" autocomplete="email" required placeholder="you@company.com" /></label>
             <label><span>03 / PROJECT TYPE</span><select id="service" name="service"><option value="">Select a service</option><option>Creative website</option><option>Website redesign</option><option>YouTube & long-form editing</option><option>Short-form video editing</option><option>Motion graphics</option><option>Product & brand video</option><option>Let’s discuss</option></select></label>
             <label><span>04 / THE BRIEF</span><textarea name="message" rows="3" required placeholder="What are we making? Add scope, timeline and links if you have them."></textarea></label>
-            <button class="send-button magnetic" type="submit"><span>OPEN EMAIL DRAFT</span><i>↗</i></button>
+            <label class="hp-field" aria-hidden="true" tabindex="-1"><span>Company</span><input name="company" autocomplete="off" tabindex="-1" /></label>
+            <button class="send-button magnetic" type="submit"><span>SEND BRIEF</span><i>↗</i></button>
           </form>
         </div>
         <div id="draft-fallback" class="draft-fallback" hidden><p>Your email app didn’t open? Copy the prepared brief.</p><textarea id="draft-text" readonly aria-label="Prepared email brief"></textarea><button id="copy-brief" type="button">Copy brief</button></div>
