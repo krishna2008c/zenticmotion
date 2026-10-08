@@ -518,6 +518,12 @@ footer a { justify-self: end; }
   .tk-cell { min-height: 208px; padding: 18px; }
   .tk-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
   .tk-meta small { white-space: normal; }
+  /* Mobile: a lone last cell (odd count) spans the full row with centered content,
+     so it doesn't look like a missing partner cell. */
+  .tk-grid-web > .tk-cell:last-child:nth-child(odd),
+  .tk-grid-motion > .tk-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .tk-grid-web > .tk-cell:last-child:nth-child(odd) .tk-meta,
+  .tk-grid-motion > .tk-cell:last-child:nth-child(odd) .tk-meta { align-items: center; text-align: center; }
   .tk-logo { width: 58%; }
   .tk-cell-wide .tk-logo { width: 58%; }
   .tk-meta strong { font-size: 13px; }
