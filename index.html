@@ -313,7 +313,23 @@
           <form id="contact-form" class="contact-form js-reveal" hidden>
             <label><span>01 / NAME</span><input name="name" autocomplete="name" required placeholder="Your name" /></label>
             <label><span>02 / EMAIL</span><input type="email" name="email" autocomplete="email" required placeholder="you@company.com" /></label>
-            <label><span>03 / PROJECT TYPE</span><select id="service" name="service"><option value="">Select a service</option><option>Creative website</option><option>Website redesign</option><option>YouTube & long-form editing</option><option>Short-form video editing</option><option>Motion graphics</option><option>Product & brand video</option><option>Let’s discuss</option></select></label>
+            <div class="form-row" role="group" aria-labelledby="service-label"><span id="service-label">03 / PROJECT TYPE</span>
+              <div class="custom-select" id="service-select">
+                <button type="button" class="cs-button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="service-label">
+                  <span class="cs-value placeholder">Select a service</span><i aria-hidden="true">↓</i>
+                </button>
+                <ul class="cs-list" role="listbox" aria-label="Project type" hidden>
+                  <li role="option" data-value="Creative website" aria-selected="false">Creative website</li>
+                  <li role="option" data-value="Website redesign" aria-selected="false">Website redesign</li>
+                  <li role="option" data-value="YouTube & long-form editing" aria-selected="false">YouTube & long-form editing</li>
+                  <li role="option" data-value="Short-form video editing" aria-selected="false">Short-form video editing</li>
+                  <li role="option" data-value="Motion graphics" aria-selected="false">Motion graphics</li>
+                  <li role="option" data-value="Product & brand video" aria-selected="false">Product & brand video</li>
+                  <li role="option" data-value="Let’s discuss" aria-selected="false">Let’s discuss</li>
+                </ul>
+                <input type="hidden" name="service" id="service" value="" />
+              </div>
+            </div>
             <label><span>04 / THE BRIEF</span><textarea name="message" rows="3" required placeholder="What are we making? Add scope, timeline and links if you have them."></textarea></label>
             <label class="hp-field" aria-hidden="true" tabindex="-1"><span>Company</span><input name="company" autocomplete="off" tabindex="-1" /></label>
             <button class="send-button magnetic" type="submit"><span>SEND BRIEF</span><i>↗</i></button>

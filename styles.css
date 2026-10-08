@@ -403,8 +403,8 @@ h1, h2, h3 { font-weight: 500; }
 .email { display: block; width: fit-content; padding-bottom: 7px; border-bottom: 1px solid currentColor; font-size: clamp(17px, 1.7vw, 28px); letter-spacing: -0.03em; word-break: break-word; }
 .copy-email { margin-top: 13px; font-size: 9px; letter-spacing: 0.13em; text-transform: uppercase; }
 .contact-form { border-top: 1px solid rgba(255,255,255,0.45); }
-.contact-form label { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: start; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.45); }
-.contact-form label > span { padding-top: 7px; font-size: 9px; letter-spacing: 0.13em; }
+.contact-form label, .contact-form .form-row { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: start; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.45); }
+.contact-form label > span, .contact-form .form-row > span { padding-top: 7px; font-size: 9px; letter-spacing: 0.13em; }
 .contact-form input, .contact-form textarea, .contact-form select { width: 100%; border: 0; outline: 0; padding: 0; background: transparent; border-radius: 0; font-size: clamp(18px, 2vw, 30px); letter-spacing: -0.035em; resize: vertical; }
 .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.55); }
 .contact-form select { cursor: pointer; }
@@ -529,8 +529,8 @@ footer a { justify-self: end; }
   .contact-layout { grid-template-columns: 1fr; gap: 70px; }
   .contact-direct > p { font-size: 12px; }
   .email { font-size: 17px; }
-  .contact-form label { grid-template-columns: 1fr; gap: 12px; }
-  .contact-form label > span { padding: 0; }
+  .contact-form label, .contact-form .form-row { grid-template-columns: 1fr; gap: 12px; }
+  .contact-form label > span, .contact-form .form-row > span { padding: 0; }
   .contact-form input, .contact-form textarea, .contact-form select { font-size: 19px; }
   .social-bar { grid-template-columns: repeat(2, 1fr); margin-top: 90px; }
   .social-bar a { min-height: 68px; }
@@ -649,6 +649,60 @@ footer a { justify-self: end; }
   opacity: 0;
   pointer-events: none;
 }
+/* Custom service dropdown — full styling control, same form API. */
+.custom-select { position: relative; width: 100%; }
+.cs-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: clamp(18px, 2vw, 30px);
+  letter-spacing: -0.035em;
+  color: #f4f3ec;
+  text-align: left;
+}
+.cs-value.placeholder { color: rgba(255,255,255,0.55); }
+.cs-button i {
+  font-style: normal;
+  font-size: 0.65em;
+  color: rgba(255,255,255,0.7);
+  transition: transform 0.25s ease;
+}
+.custom-select.open .cs-button i { transform: rotate(180deg); }
+.cs-list {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+}
+.cs-list[hidden] { display: none; }
+.cs-list li {
+  padding: 12px 14px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: clamp(16px, 1.6vw, 22px);
+  letter-spacing: -0.02em;
+  color: #f4f3ec;
+  transition: background 0.15s ease;
+}
+.cs-list li:hover,
+.cs-list li.hi { background: rgba(255,255,255,0.1); }
+.cs-list li[aria-selected="true"] { background: rgba(255,255,255,0.16); }
 /* The about section had an opaque black background that would hide the tube.
    Body is the same #0b0b0b, so transparent is visually identical — except the
    tube now shows through the empty black space. Cards keep their own opaque
