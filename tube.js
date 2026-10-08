@@ -108,32 +108,45 @@ import * as THREE from "three";
   const TUBE_H = 52;
   const ctrl = [];
   const CTRL_N = 10;
+  // Mobile tuning: on narrow portrait screens the same world-size tube
+  // fills half the viewport and washes out the text — so mobile gets a
+  // slimmer tube, tighter glow, gentler wave and a pulled-back camera.
+  const IS_MOBILE = smallScreen.matches;
+  const RADIUS = IS_MOBILE ? 0.26 : 0.45;
+  const HALO1_X = IS_MOBILE ? 1.8 : 2.4;
+  const HALO2_X = IS_MOBILE ? 3.2 : 4.8;
+  const CAM_Z = IS_MOBILE ? 23 : 18;
+  const EMISSIVE_BASE = IS_MOBILE ? 1.0 : 1.5;
+  const EMISSIVE_PULSE = IS_MOBILE ? 0.18 : 0.3;
+  const HALO1_OP = IS_MOBILE ? 0.06 : 0.1;
+  const HALO2_OP = IS_MOBILE ? 0.028 : 0.045;
+  const WAVE_X = IS_MOBILE ? 1.4 : 2.6;
+  const WAVE_X2 = IS_MOBILE ? 0.5 : 0.8;
   for (let i = 0; i <= CTRL_N; i++) {
     const t = i / CTRL_N; // 0 = top, 1 = bottom
     const y = 14 - t * TUBE_H; // +14 → -38
     ctrl.push(
       new THREE.Vector3(
-        2.6 * Math.sin(y * 0.28) + 0.8 * Math.sin(y * 0.11 + 1.0),
+        WAVE_X * Math.sin(y * 0.28) + WAVE_X2 * Math.sin(y * 0.11 + 1.0),
         y,
         1.2 * Math.sin(y * 0.18 + 0.5) // subtle depth variation
       )
     );
   }
   const curve = new THREE.CatmullRomCurve3(ctrl, false, "centripetal");
-  const TUBULAR = smallScreen.matches ? 150 : 240;
-  const RADIAL = smallScreen.matches ? 20 : 30;
-  const RADIUS = 0.45;
+  const TUBULAR = IS_MOBILE ? 150 : 240;
+  const RADIAL = IS_MOBILE ? 20 : 30;
   const tubeGeo = new THREE.TubeGeometry(curve, TUBULAR, RADIUS, RADIAL, false);
   // Soft glow halos: larger additive tubes around the core (fake bloom —
   // no postprocessing pass needed). These make it read as a tube light.
-  const haloGeo1 = new THREE.TubeGeometry(curve, TUBULAR, RADIUS * 2.4, RADIAL, false);
-  const haloGeo2 = new THREE.TubeGeometry(curve, TUBULAR, RADIUS * 4.8, RADIAL, false);
+  const haloGeo1 = new THREE.TubeGeometry(curve, TUBULAR, RADIUS * HALO1_X, RADIAL, false);
+  const haloGeo2 = new THREE.TubeGeometry(curve, TUBULAR, RADIUS * HALO2_X, RADIAL, false);
 
   const tubeUniforms = { uTime: { value: 0 } };
   const tubeMat = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     emissive: 0xffffff, // tube-light glow
-    emissiveIntensity: 1.5,
+    emissiveIntensity: EMISSIVE_BASE,
     roughness: 0.35,
     metalness: 0.05,
     envMapIntensity: 0.5,
@@ -156,11 +169,11 @@ import * as THREE from "three";
   const tube = new THREE.Mesh(tubeGeo, tubeMat);
   swayGroup.add(tube);
   const haloMat1 = new THREE.MeshBasicMaterial({
-    color: 0xe8eeff, transparent: true, opacity: 0.1,
+    color: 0xe8eeff, transparent: true, opacity: HALO1_OP,
     blending: THREE.AdditiveBlending, depthWrite: false,
   });
   const haloMat2 = new THREE.MeshBasicMaterial({
-    color: 0xd8e2ff, transparent: true, opacity: 0.045,
+    color: 0xd8e2ff, transparent: true, opacity: HALO2_OP,
     blending: THREE.AdditiveBlending, depthWrite: false,
   });
   const halo1 = new THREE.Mesh(haloGeo1, haloMat1);
@@ -231,15 +244,15 @@ import * as THREE from "three";
     }
     const px = allowParallax ? mouse.x * 1.4 : 0;
     const py = allowParallax ? mouse.y * -0.9 : 0;
-    camera.position.set(px, camY + py, 18);
+    camera.position.set(px, camY + py, CAM_Z);
     camera.lookAt(px * 0.5, camY - 2.5 + py * 0.5, 0);
 
     // Idle: gentle sway + breathing glow (tube-light shimmer).
     const tSec = time * 0.001;
     swayGroup.position.x = Math.sin(time * 0.0004) * 0.5;
     swayGroup.rotation.z = Math.sin(time * 0.00022) * 0.022;
-    tubeMat.emissiveIntensity = 1.45 + Math.sin(tSec * 1.2) * 0.3;
-    haloMat1.opacity = 0.09 + Math.sin(tSec * 1.2) * 0.02;
+    tubeMat.emissiveIntensity = EMISSIVE_BASE + Math.sin(tSec * 1.2) * EMISSIVE_PULSE;
+    haloMat1.opacity = HALO1_OP * 0.9 + Math.sin(tSec * 1.2) * HALO1_OP * 0.2;
     key.position.x = 4 + Math.sin(time * 0.0004) * 1.4;
     key.position.y = 6 + Math.cos(time * 0.0003) * 0.9;
     tubeUniforms.uTime.value = tSec;
@@ -249,7 +262,7 @@ import * as THREE from "three";
     const fade = smoothstep(0, 0.08, p) * (1 - smoothstep(0.82, 0.95, p));
     tubeMat.opacity = fade;
     haloMat1.opacity *= fade;
-    haloMat2.opacity = 0.045 * fade;
+    haloMat2.opacity = HALO2_OP * fade;
 
     renderer.render(scene, camera);
   }
