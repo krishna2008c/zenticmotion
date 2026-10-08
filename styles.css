@@ -612,3 +612,37 @@ footer a { justify-self: end; }
 @media (hover: none) {
   .cursor { display: none; }
 }
+
+/* ============================================================
+   Scroll-driven 3D tube — background layer only.
+   The fixed WebGL canvas sits at z-index 0 (above the body
+   background, below all content). The three black-region
+   sections (#web, #work, #about) are lifted just above it so
+   their content — text, thumbnails, cards — always paints over
+   the tube. Cards/thumbnails keep their own opaque surfaces.
+   The canvas never intercepts clicks, hover or scrolling.
+   ============================================================ */
+#tube-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+/* Every top-level section sits above the tube canvas, so the tube can
+   never paint over the hero, the white/paper sections or the footer —
+   it only shows through the transparent black region. */
+#main > section,
+#main > .ticker {
+  position: relative;
+  z-index: 1;
+}
+/* The about section had an opaque black background that would hide the tube.
+   Body is the same #0b0b0b, so transparent is visually identical — except the
+   tube now shows through the empty black space. Cards keep their own opaque
+   surfaces and still occlude the tube where they overlap. */
+.about {
+  background: transparent;
+}

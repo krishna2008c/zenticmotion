@@ -21,6 +21,9 @@
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./pages.css" />
+    <script type="importmap">
+      { "imports": { "three": "./assets/three.module.min.js" } }
+    </script>
     <script src="./content.js" defer></script>
     <script src="./script.js" defer></script>
     <script src="./transitions.js" defer></script>
@@ -328,6 +331,7 @@
       <p class="player-help">If playback doesn’t start, open the original.</p>
     </dialog>
     <div class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./tube.js"></script>
     <script>
       /* Failsafe: if the intro script never runs, never leave the visitor on the blue screen. */
       setTimeout(function () {
