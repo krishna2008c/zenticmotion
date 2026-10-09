@@ -8,11 +8,21 @@
     <meta name="description" content="Premium portfolio and business websites by Krishna Chauhan — Zentic Motion. Motion-led web design for photographers, brands and businesses. Delhi, India; available remotely." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Zentic Motion" />
+    <meta property="og:url" content="https://zenticmotion.vercel.app/" />
     <meta property="og:title" content="Zentic Motion — Cut. Move. Feel." />
-    <meta property="og:description" content="Premium websites and creative web experiences by Krishna Chauhan." />
-    <meta property="og:image" content="https://i.ytimg.com/vi/iWEqvKaUiIA/maxresdefault.jpg" />
-    <meta property="og:image:alt" content="Zentic Motion showreel artwork" />
+    <meta property="og:description" content="Premium websites and creative web experiences by Krishna Chauhan — designed to turn visitors into clients." />
+    <meta property="og:image" content="https://zenticmotion.vercel.app/assets/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zentic Motion — Cut. Move. Feel." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zentic Motion — Cut. Move. Feel." />
+    <meta name="twitter:description" content="Premium websites and creative web experiences by Krishna Chauhan — designed to turn visitors into clients." />
+    <meta name="twitter:image" content="https://zenticmotion.vercel.app/assets/og-cover.jpg" />
+    <link rel="canonical" href="https://zenticmotion.vercel.app/" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ProfessionalService","name":"Zentic Motion","url":"https://zenticmotion.vercel.app/","description":"Premium portfolio and business websites — motion-led web design for photographers, brands and small businesses.","founder":{"@type":"Person","name":"Krishna Chauhan"},"sameAs":["https://www.instagram.com/zenticmotion","https://www.youtube.com/@zenticmotion","https://github.com/krishna2008c"],"areaServed":"Worldwide","priceRange":"$$"}
+    </script>
     <script>
       document.documentElement.classList.add("js");
       document.querySelector('meta[name="theme-color"]').setAttribute("content", "#3157ff");
@@ -21,11 +31,9 @@
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./pages.css" />
-    <script type="importmap">
-      { "imports": { "three": "./assets/three.module.min.js" } }
-    </script>
     <script src="./content.js" defer></script>
     <script src="./script.js" defer></script>
+    <script src="./depth.js" defer></script>
     <script src="./transitions.js" defer></script>
     <noscript><style>.loader{display:none!important}body.loading{overflow:auto!important}.js-reveal{opacity:1!important;transform:none!important}</style></noscript>
   </head>
@@ -213,7 +221,12 @@
         })();
       </script>
 
+      <div class="depth-zone" id="depth-zone" aria-hidden="true">
+        <canvas class="depth-canvas" id="depth-canvas"></canvas>
+      </div>
+
       <section class="about section-pad" id="about" aria-labelledby="about-title">
+        <canvas class="depth-echo" id="depth-echo" aria-hidden="true"></canvas>
         <div class="about-layout">
           <div class="about-title-block js-reveal"><p class="eyebrow"><span>03</span> ABOUT</p><h2 id="about-title">One eye on<br />the cut. One on<br /><em>the feeling.</em></h2></div>
           <div class="about-copy js-reveal"><p class="about-lead">I’m Krishna Chauhan, the web designer and creative developer behind Zentic Motion.</p><p>I build premium portfolio and business websites — with cinematic art direction, smooth motion and a clear focus on turning visitors into clients. Video editing and motion graphics are part of the toolkit, not the whole story.</p><p>Based in Delhi, India. Working remotely with photographers, brands and small businesses.</p><a class="underlined-link magnetic" href="#contact">Tell me about the project <span>↗</span></a></div>
@@ -296,12 +309,31 @@
       <section class="services light-section" id="services" aria-labelledby="services-title">
         <div class="services-head js-reveal"><p class="eyebrow"><span>04</span> SERVICES</p><h2 id="services-title">What I can<br />handle.</h2></div>
         <div class="service-list">
-          <a href="#contact" data-service="Creative website" class="service-row js-reveal"><span>01</span><h3>Portfolio & business websites</h3><p>Motion-led pages with strong art direction.</p><i>↘</i></a>
-          <a href="#contact" data-service="Website redesign" class="service-row js-reveal"><span>02</span><h3>Website redesign & upgrades</h3><p>Turn an outdated site into a client magnet.</p><i>↘</i></a>
-          <a href="#contact" data-service="YouTube & long-form editing" class="service-row js-reveal"><span>03</span><h3>YouTube & long-form editing</h3><p>Structure, pacing, sound and polish.</p><i>↘</i></a>
-          <a href="#contact" data-service="Short-form video editing" class="service-row js-reveal"><span>04</span><h3>Reels, Shorts & social edits</h3><p>Fast, clear and platform-aware.</p><i>↘</i></a>
-          <a href="#contact" data-service="Motion graphics" class="service-row js-reveal"><span>05</span><h3>Motion graphics & animated type</h3><p>Titles, transitions and visual systems.</p><i>↘</i></a>
-          <a href="#contact" data-service="Product & brand video" class="service-row js-reveal"><span>06</span><h3>Product & brand films</h3><p>3D studies, promos and launch visuals.</p><i>↘</i></a>
+          <a href="#contact" data-service="Web design &amp; development" class="service-row service-primary js-reveal">
+            <span class="service-index" aria-hidden="true">01</span>
+            <div class="service-main">
+              <p class="service-tag">Primary focus</p>
+              <h3>Web Design &amp; Development</h3>
+              <p class="service-desc">Premium landing pages, portfolio websites and custom frontend — designed to turn visitors into clients.</p>
+            </div>
+            <i aria-hidden="true">↘</i>
+          </a>
+          <a href="#contact" data-service="Interactive / 3D web" class="service-row js-reveal">
+            <span class="service-index" aria-hidden="true">02</span>
+            <div class="service-main">
+              <h3>Interactive / 3D Web</h3>
+              <p class="service-desc">Three.js product experiences, WebGL visuals and scroll-driven storytelling that make a brand impossible to ignore.</p>
+            </div>
+            <i aria-hidden="true">↘</i>
+          </a>
+          <a href="#contact" data-service="Motion &amp; video" class="service-row service-secondary js-reveal">
+            <span class="service-index" aria-hidden="true">03</span>
+            <div class="service-main">
+              <h3>Motion &amp; Video</h3>
+              <p class="service-desc">Motion graphics, product films and short-form video — cut to hold attention and sell.</p>
+            </div>
+            <i aria-hidden="true">↘</i>
+          </a>
         </div>
       </section>
 
@@ -313,26 +345,9 @@
           <form id="contact-form" class="contact-form js-reveal" hidden>
             <label><span>01 / NAME</span><input name="name" autocomplete="name" required placeholder="Your name" /></label>
             <label><span>02 / EMAIL</span><input type="email" name="email" autocomplete="email" required placeholder="you@company.com" /></label>
-            <div class="form-row" role="group" aria-labelledby="service-label"><span id="service-label">03 / PROJECT TYPE</span>
-              <div class="custom-select" id="service-select">
-                <button type="button" class="cs-button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="service-label">
-                  <span class="cs-value placeholder">Select a service</span><i aria-hidden="true">↓</i>
-                </button>
-                <ul class="cs-list" role="listbox" aria-label="Project type" hidden>
-                  <li role="option" data-value="Creative website" aria-selected="false">Creative website</li>
-                  <li role="option" data-value="Website redesign" aria-selected="false">Website redesign</li>
-                  <li role="option" data-value="YouTube & long-form editing" aria-selected="false">YouTube & long-form editing</li>
-                  <li role="option" data-value="Short-form video editing" aria-selected="false">Short-form video editing</li>
-                  <li role="option" data-value="Motion graphics" aria-selected="false">Motion graphics</li>
-                  <li role="option" data-value="Product & brand video" aria-selected="false">Product & brand video</li>
-                  <li role="option" data-value="Let’s discuss" aria-selected="false">Let’s discuss</li>
-                </ul>
-                <input type="hidden" name="service" id="service" value="" />
-              </div>
-            </div>
+            <label><span>03 / PROJECT TYPE</span><select id="service" name="service"><option value="">Select a service</option><option>Web design &amp; development</option><option>Interactive / 3D web</option><option>Motion &amp; video</option><option>Let’s discuss</option></select></label>
             <label><span>04 / THE BRIEF</span><textarea name="message" rows="3" required placeholder="What are we making? Add scope, timeline and links if you have them."></textarea></label>
-            <label class="hp-field" aria-hidden="true" tabindex="-1"><span>Company</span><input name="company" autocomplete="off" tabindex="-1" /></label>
-            <button class="send-button magnetic" type="submit"><span>SEND BRIEF</span><i>↗</i></button>
+            <button class="send-button magnetic" type="submit"><span>OPEN EMAIL DRAFT</span><i>↗</i></button>
           </form>
         </div>
         <div id="draft-fallback" class="draft-fallback" hidden><p>Your email app didn’t open? Copy the prepared brief.</p><textarea id="draft-text" readonly aria-label="Prepared email brief"></textarea><button id="copy-brief" type="button">Copy brief</button></div>
@@ -348,7 +363,6 @@
       <p class="player-help">If playback doesn’t start, open the original.</p>
     </dialog>
     <div class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="./tube.js"></script>
     <script>
       /* Failsafe: if the intro script never runs, never leave the visitor on the blue screen. */
       setTimeout(function () {

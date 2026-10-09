@@ -29,7 +29,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 86px; overflow-x: clip; }
+html { scroll-behavior: smooth; scroll-padding-top: 86px; }
 
 body {
   margin: 0;
@@ -320,7 +320,7 @@ h1, h2, h3 { font-weight: 500; }
 .sel-count { display: flex; align-items: baseline; gap: 10px; padding-bottom: 12px; color: var(--muted-dark); font-size: 10px; letter-spacing: 0.18em; white-space: nowrap; }
 .sel-count span { color: var(--white); font-size: 15px; letter-spacing: 0; }
 .sel-grid { display: grid; grid-template-columns: 1fr 1fr; border-right: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
-.sel-card { margin: 0; min-width: 0; border-top: 1px solid var(--line-dark); border-left: 1px solid var(--line-dark); background: var(--black); transition: border-color 0.45s var(--ease); }
+.sel-card { margin: 0; border-top: 1px solid var(--line-dark); border-left: 1px solid var(--line-dark); background: var(--black); transition: border-color 0.45s var(--ease); }
 .sel-card.js-reveal { transition: opacity 0.9s var(--ease) var(--d, 0s), transform 0.9s var(--ease) var(--d, 0s), border-color 0.45s var(--ease); }
 .sel-card:hover { z-index: 1; border-color: rgba(244, 243, 236, 0.4); }
 .sel-media { position: relative; display: block; aspect-ratio: 2 / 1; overflow: hidden; border-bottom: 1px solid var(--line-dark); background: #0e0e0e; }
@@ -364,7 +364,7 @@ h1, h2, h3 { font-weight: 500; }
 .tk-grid-web .tk-cell { grid-column: span 2; }
 .tk-grid-web .tk-cell-wide { grid-column: span 3; }
 .tk-grid-motion .tk-cell { grid-column: span 2; }
-.tk-cell { position: relative; margin: 0; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; min-height: clamp(250px, 28vw, 360px); padding: clamp(20px, 2.2vw, 34px); border-top: 1px solid var(--line-dark); border-left: 1px solid var(--line-dark); background: var(--black); overflow: hidden; }
+.tk-cell { position: relative; margin: 0; display: flex; flex-direction: column; justify-content: flex-end; min-height: clamp(250px, 28vw, 360px); padding: clamp(20px, 2.2vw, 34px); border-top: 1px solid var(--line-dark); border-left: 1px solid var(--line-dark); background: var(--black); overflow: hidden; }
 .tk-cell.js-reveal { transition: opacity 0.9s var(--ease) var(--d, 0s), transform 0.9s var(--ease) var(--d, 0s), background-color 0.45s var(--ease), border-color 0.45s var(--ease); }
 .tk-cell::after { content: ""; position: absolute; inset: 0; z-index: 2; background: radial-gradient(230px circle at var(--mx, 50%) var(--my, 42%), rgba(244, 243, 236, 0.055), transparent 70%); opacity: 0; transition: opacity 0.5s var(--ease); pointer-events: none; }
 .tk-cell:hover { background: #101010; border-color: rgba(244, 243, 236, 0.42); z-index: 1; }
@@ -379,17 +379,29 @@ h1, h2, h3 { font-weight: 500; }
 .tk-meta small { color: var(--muted-dark); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
 
 .services { padding: var(--section) var(--pad); }
-.services-head { display: grid; grid-template-columns: 0.4fr 1fr; gap: 40px; align-items: start; margin-bottom: 90px; }
+.services-head { display: grid; grid-template-columns: 0.4fr 1fr; gap: 40px; align-items: start; margin-bottom: clamp(56px, 7vw, 110px); }
 .services-head .eyebrow { margin-top: 10px; }
 .service-list { border-top: 1px solid var(--line-light); }
-.service-row { display: grid; grid-template-columns: 55px minmax(240px, 1.4fr) minmax(180px, 0.65fr) 40px; gap: 22px; align-items: center; min-height: 116px; border-bottom: 1px solid var(--line-light); transition: padding 0.35s var(--ease), background 0.3s, color 0.3s; }
-.service-row > span { font-size: 9px; letter-spacing: 0.12em; color: var(--muted-light); }
-.service-row h3 { font-size: clamp(24px, 3vw, 52px); line-height: 1.04; letter-spacing: -0.055em; }
-.service-row p { color: var(--muted-light); font-size: 11px; }
-.service-row i { justify-self: end; font-size: 24px; font-style: normal; transition: transform 0.35s; }
-.service-row:hover { padding: 0 20px; background: var(--blue); color: #fff; }
-.service-row:hover > span, .service-row:hover p { color: rgba(255,255,255,0.72); }
-.service-row:hover i { transform: rotate(-45deg); }
+.service-row {
+  display: grid; grid-template-columns: 64px 1fr 56px; gap: 26px; align-items: center;
+  padding: 46px 0; border-bottom: 1px solid var(--line-light);
+  color: inherit; text-decoration: none;
+  transition: background-color 0.45s var(--ease), padding 0.45s var(--ease);
+}
+.service-index { font-size: 10px; letter-spacing: 0.14em; color: var(--muted-light); transition: color 0.4s var(--ease); }
+.service-tag { margin-bottom: 18px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); }
+.service-main h3 { font-weight: 500; letter-spacing: -0.05em; line-height: 0.98; font-size: clamp(28px, 3.8vw, 60px); transition: transform 0.5s var(--ease); }
+.service-primary { padding: 62px 0; }
+.service-primary .service-main h3 { font-size: clamp(38px, 5.4vw, 88px); }
+.service-secondary .service-main h3 { font-size: clamp(24px, 3.2vw, 50px); }
+.service-desc { margin-top: 16px; max-width: 54ch; font-size: 13px; line-height: 1.7; color: var(--muted-light); }
+.service-row > i { justify-self: end; font-size: 30px; font-style: normal; transition: transform 0.45s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .service-row:hover { background: rgba(11, 11, 11, 0.045); padding-left: 22px; padding-right: 22px; }
+  .service-row:hover .service-main h3 { transform: translateX(10px); }
+  .service-row:hover > i { transform: translate(5px, 5px); }
+  .service-row:hover .service-index { color: var(--blue); }
+}
 
 .contact { padding: 90px var(--pad) 24px; background: var(--blue); color: #fff; }
 .contact-top { display: flex; justify-content: space-between; gap: 30px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.35); }
@@ -403,8 +415,8 @@ h1, h2, h3 { font-weight: 500; }
 .email { display: block; width: fit-content; padding-bottom: 7px; border-bottom: 1px solid currentColor; font-size: clamp(17px, 1.7vw, 28px); letter-spacing: -0.03em; word-break: break-word; }
 .copy-email { margin-top: 13px; font-size: 9px; letter-spacing: 0.13em; text-transform: uppercase; }
 .contact-form { border-top: 1px solid rgba(255,255,255,0.45); }
-.contact-form label, .contact-form .form-row { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: start; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.45); }
-.contact-form label > span, .contact-form .form-row > span { padding-top: 7px; font-size: 9px; letter-spacing: 0.13em; }
+.contact-form label { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: start; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.45); }
+.contact-form label > span { padding-top: 7px; font-size: 9px; letter-spacing: 0.13em; }
 .contact-form input, .contact-form textarea, .contact-form select { width: 100%; border: 0; outline: 0; padding: 0; background: transparent; border-radius: 0; font-size: clamp(18px, 2vw, 30px); letter-spacing: -0.035em; resize: vertical; }
 .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.55); }
 .contact-form select { cursor: pointer; }
@@ -503,10 +515,10 @@ footer a { justify-self: end; }
   .section-head h2, .services h2, .about h2 { font-size: clamp(55px, 16vw, 92px); }
   .section-copy { font-size: 12px; }
   .sel-grid { grid-template-columns: 1fr; }
-  .sel-media { aspect-ratio: 4 / 3; }
   .sel-head-row h2 { font-size: clamp(44px, 13vw, 72px); }
-  .sel-info { padding: 16px 18px 18px; }
+  .sel-info { padding: 16px 18px 18px; flex-direction: column; align-items: flex-start; gap: 10px; }
   .sel-info h3 { font-size: 20px; }
+  .sel-meta { white-space: normal; }
   .sel-foot { justify-content: flex-start; padding-bottom: var(--section); }
   .about-layout { grid-template-columns: 1fr; gap: 44px; }
   .about-copy { padding-top: 0; }
@@ -516,30 +528,27 @@ footer a { justify-self: end; }
   .tk-grid-web .tk-cell, .tk-grid-web .tk-cell-wide, .tk-grid-motion .tk-cell { grid-column: span 1; }
   .tk-grid-web, .tk-grid-motion { grid-template-columns: repeat(2, 1fr); }
   .tk-cell { min-height: 208px; padding: 18px; }
-  .tk-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .tk-meta small { white-space: normal; }
-  /* Mobile: a lone last cell (odd count) spans the full row with centered content,
-     so it doesn't look like a missing partner cell. */
-  .tk-grid-web > .tk-cell:last-child:nth-child(odd),
-  .tk-grid-motion > .tk-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }
-  .tk-grid-web > .tk-cell:last-child:nth-child(odd) .tk-meta,
-  .tk-grid-motion > .tk-cell:last-child:nth-child(odd) .tk-meta { align-items: center; text-align: center; }
   .tk-logo { width: 58%; }
   .tk-cell-wide .tk-logo { width: 58%; }
   .tk-meta strong { font-size: 13px; }
   .tk-meta small { font-size: 9px; }
   .services-head { grid-template-columns: 1fr; gap: 25px; margin-bottom: 55px; }
-  .service-row { grid-template-columns: 30px 1fr 25px; gap: 12px; min-height: 96px; }
-  .service-row p { display: none; }
-  .service-row h3 { font-size: clamp(23px, 7vw, 34px); }
-  .service-row:hover { padding: 0 10px; }
+  .service-row { grid-template-columns: 34px 1fr 30px; gap: 14px; padding: 34px 0; }
+  .service-primary { padding: 42px 0; }
+  .service-row .service-main h3 { font-size: clamp(26px, 7.4vw, 38px); }
+  .service-primary .service-main h3 { font-size: clamp(32px, 9vw, 48px); }
+  .service-secondary .service-main h3 { font-size: clamp(24px, 6.8vw, 34px); }
+  .service-desc { font-size: 12px; margin-top: 12px; }
+  .service-tag { margin-bottom: 12px; }
+  .service-row > i { font-size: 22px; }
+  .service-row:hover { padding-left: 10px; padding-right: 10px; }
   .contact { padding-top: 70px; }
   .contact-title { margin: 50px 0 70px; font-size: 24vw; }
   .contact-layout { grid-template-columns: 1fr; gap: 70px; }
   .contact-direct > p { font-size: 12px; }
   .email { font-size: 17px; }
-  .contact-form label, .contact-form .form-row { grid-template-columns: 1fr; gap: 12px; }
-  .contact-form label > span, .contact-form .form-row > span { padding: 0; }
+  .contact-form label { grid-template-columns: 1fr; gap: 12px; }
+  .contact-form label > span { padding: 0; }
   .contact-form input, .contact-form textarea, .contact-form select { font-size: 19px; }
   .social-bar { grid-template-columns: repeat(2, 1fr); margin-top: 90px; }
   .social-bar a { min-height: 68px; }
@@ -622,100 +631,18 @@ footer a { justify-self: end; }
   .cursor { display: none; }
 }
 
-/* ============================================================
-   Scroll-driven 3D tube — background layer only.
-   The fixed WebGL canvas sits at z-index 0 (above the body
-   background, below all content). The three black-region
-   sections (#web, #work, #about) are lifted just above it so
-   their content — text, thumbnails, cards — always paints over
-   the tube. Cards/thumbnails keep their own opaque surfaces.
-   The canvas never intercepts clicks, hover or scrolling.
-   ============================================================ */
-#tube-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  visibility: hidden;
+/* ---------- Depth transition: Selected Motion -> About ----------
+   "The Grid Gains Depth": the site's hairline grid extrudes into an
+   abstract architectural corridor on scroll, then resolves back to 2D. */
+.depth-zone { position: relative; height: 160vh; background: var(--black); }
+.depth-canvas { position: sticky; top: 0; display: block; width: 100%; height: 100vh; height: 100svh; }
+.about { position: relative; }
+.depth-echo { position: absolute; top: 0; left: 0; width: 100%; height: 360px; z-index: 0; pointer-events: none; }
+.about-layout, .about .toolkit { position: relative; z-index: 1; }
+@media (max-width: 760px) {
+  .depth-zone { height: 130vh; }
+  .depth-echo { height: 280px; }
 }
-/* Every top-level section sits above the tube canvas, so the tube can
-   never paint over the hero, the white/paper sections or the footer —
-   it only shows through the transparent black region. */
-#main > section,
-#main > .ticker {
-  position: relative;
-  z-index: 1;
-}
-/* Honeypot anti-spam field: invisible to humans, bots fill it. */
-.hp-field {
-  position: absolute !important;
-  left: -9999px !important;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-/* Custom service dropdown — full styling control, same form API. */
-.custom-select { position: relative; width: 100%; }
-.cs-button {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font-size: clamp(18px, 2vw, 30px);
-  letter-spacing: -0.035em;
-  color: #f4f3ec;
-  text-align: left;
-}
-.cs-value.placeholder { color: rgba(255,255,255,0.55); }
-.cs-button i {
-  font-style: normal;
-  font-size: 0.65em;
-  color: rgba(255,255,255,0.7);
-  transition: transform 0.25s ease;
-}
-.custom-select.open .cs-button i { transform: rotate(180deg); }
-.cs-list {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  right: 0;
-  z-index: 30;
-  list-style: none;
-  margin: 0;
-  padding: 8px;
-  background: #111;
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 4px;
-  max-height: 320px;
-  overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
-}
-.cs-list[hidden] { display: none; }
-.cs-list li {
-  padding: 12px 14px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: clamp(16px, 1.6vw, 22px);
-  letter-spacing: -0.02em;
-  color: #f4f3ec;
-  transition: background 0.15s ease;
-}
-.cs-list li:hover,
-.cs-list li.hi { background: rgba(255,255,255,0.1); }
-.cs-list li[aria-selected="true"] { background: rgba(255,255,255,0.16); }
-/* The about section had an opaque black background that would hide the tube.
-   Body is the same #0b0b0b, so transparent is visually identical — except the
-   tube now shows through the empty black space. Cards keep their own opaque
-   surfaces and still occlude the tube where they overlap. */
-.about {
-  background: transparent;
+@media (prefers-reduced-motion: reduce) {
+  .depth-zone, .depth-echo { display: none; }
 }
