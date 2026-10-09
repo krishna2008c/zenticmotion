@@ -29,14 +29,14 @@
       try { if (!location.hash && "scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
     </script>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./pages.css" />
+    <link rel="stylesheet" href="./styles.css?v=15" />
+    <link rel="stylesheet" href="./pages.css?v=15" />
     <script type="importmap">
       { "imports": { "three": "./assets/three.module.min.js" } }
     </script>
-    <script src="./content.js" defer></script>
-    <script src="./script.js" defer></script>
-    <script src="./transitions.js" defer></script>
+    <script src="./content.js?v=15" defer></script>
+    <script src="./script.js?v=15" defer></script>
+    <script src="./transitions.js?v=15" defer></script>
     <noscript><style>.loader{display:none!important}body.loading{overflow:auto!important}.js-reveal{opacity:1!important;transform:none!important}</style></noscript>
   </head>
   <body class="loading">
@@ -358,7 +358,7 @@
       <p class="player-help">If playback doesn’t start, open the original.</p>
     </dialog>
     <div class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="./tube.js"></script>
+    <script type="module" src="./tube.js?v=15"></script>
     <script>
       /* Failsafe: if the intro script never runs, never leave the visitor on the blue screen. */
       setTimeout(function () {
