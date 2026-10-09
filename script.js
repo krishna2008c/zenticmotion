@@ -23,6 +23,7 @@
   let previewHovered = false;
   let heroVisible = true;
   let toastTimer = 0;
+  let menuCloseTimer = 0;
   let lastScroll = 0;
 
   heroCover?.addEventListener("error", () => {
@@ -106,7 +107,18 @@
   }
 
   function setMenu(open, restoreFocus = true) {
-    menu.hidden = !open;
+    clearTimeout(menuCloseTimer);
+    if (open) {
+      menu.hidden = false;
+      /* let the browser paint the unhidden menu, then trigger the transition */
+      if (reducedMotion.matches) menu.classList.add("open");
+      else requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add("open")));
+    } else {
+      menu.classList.remove("open");
+      /* keep it in the DOM until the exit transition finishes */
+      if (reducedMotion.matches) menu.hidden = true;
+      else menuCloseTimer = setTimeout(() => { if (!menu.classList.contains("open")) menu.hidden = true; }, 650);
+    }
     menuToggle.setAttribute("aria-expanded", String(open));
     $(".menu-word", menuToggle).textContent = open ? "Close" : "Menu";
     header.classList.toggle("menu-open", open);
