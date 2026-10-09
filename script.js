@@ -208,20 +208,116 @@
 
   const contactForm = $("#contact-form");
   contactForm.hidden = false;
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!contactForm.reportValidity()) return;
     const data = new FormData(contactForm);
-    const service = String(data.get("service") || "Zentic Motion project");
-    const subject = `Project enquiry — ${service}`;
-    const brief = `Hi Krishna,\n\n${String(data.get("message")).trim()}\n\nProject type: ${service}\nName: ${String(data.get("name")).trim()}\nEmail: ${String(data.get("email")).trim()}`;
-    $("#draft-text").value = `To: ${config.email}\nSubject: ${subject}\n\n${brief}`;
-    $("#draft-fallback").hidden = false;
-    location.href = `mailto:${config.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
+    const payload = {
+      name: String(data.get("name") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      service: String(data.get("service") || "").trim(),
+      message: String(data.get("message") || "").trim(),
+      company: String(data.get("company") || "").trim(), // honeypot
+    };
+    const sendBtn = contactForm.querySelector(".send-button");
+    const sendLabel = sendBtn.querySelector("span");
+    const originalLabel = sendLabel.textContent;
+    sendBtn.disabled = true;
+    sendLabel.textContent = "SENDING…";
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || "Send failed.");
+      contactForm.reset();
+      toast("Brief sent — I'll reply within 48 hours.");
+    } catch (err) {
+      // Fallback: open the visitor's email app with the prefilled brief.
+      const service = payload.service || "Zentic Motion project";
+      const subject = `Project enquiry — ${service}`;
+      const brief = `Hi Krishna,\n\n${payload.message}\n\nProject type: ${service}\nName: ${payload.name}\nEmail: ${payload.email}`;
+      $("#draft-text").value = `To: ${config.email}\nSubject: ${subject}\n\n${brief}`;
+      $("#draft-fallback").hidden = false;
+      toast("Couldn't send directly — your email app is opening instead.");
+      location.href = `mailto:${config.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
+    } finally {
+      sendBtn.disabled = false;
+      sendLabel.textContent = originalLabel;
+    }
   });
-  $$("[data-service]").forEach((link) => link.addEventListener("click", () => {
-    $("#service").value = link.dataset.service;
-  }));
+  // Custom service dropdown — full styling control, same form API (#service).
+  (() => {
+    const root = $("#service-select");
+    if (!root) return;
+    const button = root.querySelector(".cs-button");
+    const valueEl = root.querySelector(".cs-value");
+    const list = root.querySelector(".cs-list");
+    const input = $("#service");
+    const options = [...root.querySelectorAll('[role="option"]')];
+    let hi = -1;
+
+    const setService = (val) => {
+      input.value = val || "";
+      const match = options.find((o) => o.dataset.value === val);
+      options.forEach((o) => o.setAttribute("aria-selected", String(o === match)));
+      valueEl.textContent = match ? match.textContent.trim() : "Select a service";
+      valueEl.classList.toggle("placeholder", !match);
+      hi = match ? options.indexOf(match) : -1;
+    };
+    const isOpen = () => !list.hidden;
+    const open = () => {
+      list.hidden = false;
+      root.classList.add("open");
+      button.setAttribute("aria-expanded", "true");
+    };
+    const close = () => {
+      list.hidden = true;
+      root.classList.remove("open");
+      button.setAttribute("aria-expanded", "false");
+      options.forEach((o) => o.classList.remove("hi"));
+    };
+
+    button.addEventListener("click", () => (isOpen() ? close() : open()));
+    options.forEach((opt, i) => {
+      opt.addEventListener("click", () => {
+        setService(opt.dataset.value);
+        close();
+        button.focus();
+      });
+      opt.addEventListener("mousemove", () => {
+        options.forEach((o) => o.classList.remove("hi"));
+        opt.classList.add("hi");
+        hi = i;
+      });
+    });
+    button.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        if (!isOpen()) open();
+        hi = e.key === "ArrowDown"
+          ? Math.min(hi + 1, options.length - 1)
+          : Math.max(hi - 1, 0);
+        options.forEach((o, idx) => o.classList.toggle("hi", idx === hi));
+        options[hi].scrollIntoView({ block: "nearest" });
+      } else if (e.key === "Enter" && isOpen() && hi >= 0) {
+        e.preventDefault();
+        setService(options[hi].dataset.value);
+        close();
+      } else if (e.key === "Escape") {
+        close();
+      }
+    });
+    document.addEventListener("click", (e) => {
+      if (!root.contains(e.target)) close();
+    });
+    // Service rows on the page prefill the dropdown.
+    $$("[data-service]").forEach((link) =>
+      link.addEventListener("click", () => setService(link.dataset.service))
+    );
+  })();
 
   async function copyText(text, success, fallback) {
     try {
